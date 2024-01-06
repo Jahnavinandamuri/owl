@@ -1,0 +1,35 @@
+ Smallest Missing Integer Greater Than Sequential Prefix Sum
+------------------------------------------------------------------
+class Solution {
+public:
+    int missingInteger(vector<int>& arr) {
+        int s=arr[0],max=0,c=1,mi=0,s1=0;
+        map<int,int>m;
+        if(arr.size()==1) return arr[0]+1;
+        for(int i=1;i<arr.size();i++){
+            if(arr[i]==arr[i-1]+1){
+                c++;
+                s+=arr[i];
+            }
+            else{
+                if(max<c){
+                    s1++;
+                    max=s;
+                    mi=c;
+                }
+                s=0;
+                c=0;
+            }
+        }
+        if(s1>1) return arr[0]+1;
+        for(int i=0;i<arr.size();i++){
+            m[arr[i]]++;//1 2 3 2 5
+        }
+        while(max){
+            if(m[max]==0) return max;
+            max++;
+        }
+        return s;
+    }
+};
+[22:33, 06/01/2024] Vyshuu@aec: Mini
