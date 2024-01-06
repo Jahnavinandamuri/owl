@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int minimumOperationsToMakeEqual(int x, int y) {
+        
+        queue<pair<int,int>> q;
+        q.push({x,0});
+        set<int> s;
+        
+        while(!q.empty()) {
+            
+            int node  = q.front().first;
+            int steps = q.front().second;
+            q.pop();
+            
+            if(node == y) return steps;
+            if(s.count(node)) continue;
+            
+            s.insert(node);
+            if(node % 11 == 0){
+                q.push({node/11,steps+1});
+            }
+            if(node % 5 == 0){
+                q.push({node/5,steps+1});
+            }
+            q.push({node + 1,steps+1});
+            q.push({node - 1,steps+1});
+            
+        }
+        
+        return -1;
+    }
+};
