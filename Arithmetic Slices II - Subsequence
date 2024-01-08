@@ -1,0 +1,42 @@
+class Solution {
+    typedef long long ll;
+private:
+    int DFS(int p, ll dx, vector<unordered_map<int,int>> &dp, vector<int>& nums, 
+    unordered_map<ll, vector<int> >& pos) {
+
+        if(dp[p].count(dx))
+            return dp[p][dx];
+
+        ll need = nums[p] + dx;
+        dp[p][dx] = 1;
+
+        int next = lower_bound(pos[need].begin(),pos[need].end(), p+1) - pos[need].begin();
+
+        for(int i = next; i < pos[need].size(); i++) {
+            dp[p][dx] += DFS(pos[need][i], dx, dp, nums, pos);
+        }
+
+        return dp[p][dx];
+
+    }
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        
+        int n = nums.size();
+
+        vector<unordered_map<int,int>> dp(n);
+        unordered_map<ll, vector<int> > pos;
+
+        for(int i = 0; i < n; i++)
+            pos[nums[i]].push_back(i);
+
+        int ans = 0;
+        for(int i = 0; i < n; i++) {
+            for(int j = i+1; j < n; j++) {
+                ll dx = (ll)nums[j] - (ll)nums[i];
+                ans += DFS(j, dx, dp, nums, pos) - 1;
+            }
+        }
+        return ans;
+    }
+};
