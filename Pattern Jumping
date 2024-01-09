@@ -1,0 +1,10 @@
+//User function Template for C++
+
+class Solution {
+  public:
+    string canJump(long long n) {
+        // code here
+        if(n&(n-1)) return "False";
+        else    return "True";
+    }
+};
