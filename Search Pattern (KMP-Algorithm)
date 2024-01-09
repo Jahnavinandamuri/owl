@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+        vector <int> search(string pat, string txt)
+        {
+            //code here
+            int a = pat.size(),b=txt.size();
+            vector<int>ans;
+            int t_start=0,p_start=0;
+            while(t_start<b){
+                int c=t_start;
+                while(p_start < a && t_start < b && txt[t_start]==pat[p_start] ){
+                    p_start++,t_start++;
+                }
+                 if(p_start == a) {
+                ans.push_back(t_start - a +1 );
+            }
+                 p_start = 0;
+                 t_start = c + 1;
+            }
+            return ans;
+        }
+     
+};
