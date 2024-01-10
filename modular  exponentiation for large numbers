@@ -1,0 +1,23 @@
+class Solution
+{
+	public:
+	    long long int BE(long long int x,long long int n,long long int M){
+	        int ans=1;
+	        while(n){
+	            if(n&1){
+	                n=n-1;
+	                ans=(ans*x)%M;
+	            }
+	            else{
+	                n=n/2;
+	                x=(x*x)%M;
+	            }
+	        }
+	        return ans;
+	    }
+		long long int PowMod(long long int x,long long int n,long long int M)
+		{
+		    long long int g=BE(x,n,M);
+		    return g;
+		}
+};
