@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int p,q,c,d,e,f,g,h,t,t1,s;
+        cin>>p>>q;
+        cin>>c>>d;
+        cin>>e>>f;
+        cin>>g>>h;
+        t=abs(p-c);
+        if(t){
+            s=t;
+        }
+        else{
+            t=abs(q-d);
+            s=t;
+        }
+        t1=abs(e-g);
+        if(t1){
+            s*=t1;
+        }
+        else{
+            t1=abs(f-h);
+            s*=t1;
+        }
+        cout<<s<<endl;
+    }
+}
