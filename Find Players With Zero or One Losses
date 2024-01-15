@@ -1,0 +1,17 @@
+unordered_map<int,int> mp1,mp2;
+        vector<vector<int>> v;
+        v.push_back({});
+        v.push_back({});
+        for(auto &mat:matches){
+            mp1[mat[0]]++;
+            mp2[mat[1]]++;
+        }
+        for(auto it:mp1){
+            if(mp2[it.first]==0) v[0].push_back(it.first); 
+        }
+        sort(v[0].begin(),v[0].end());
+        for(auto it:mp2){
+            if(it.second==1) v[1].push_back(it.first);
+        }
+        sort(v[1].begin(),v[1].end());
+        return v;
