@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int dp[101][10001];
+    int solve(int ind,int n,vector<int> &square,int target){
+        
+        if(target == 0) {
+            return 0;
+        }
+        if(ind >= n || target < 0) return 1e8;
+        if(dp[ind][target] != -1) return dp[ind][target];
+
+        int ans = 1e8;
+        if(square[ind] <= target){
+            ans = min(ans,1 + solve(ind,n,square,target-square[ind]));
+        }
+        ans = min(ans, solve(ind+1,n,square,target) );
+
+        return dp[ind][target] = ans;
+    }
+    int numSquares(int target) {
+        vector<int> square;
+        for(int i=1;i<=101;i++){
+            square.push_back(i*i);
+        }
+
+        int n = square.size();
+        memset(dp,-1,sizeof(dp));
+
+        return solve(0,n,square,target);
+    }
+};
